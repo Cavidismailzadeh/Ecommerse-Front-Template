@@ -1,0 +1,18 @@
+﻿@model BlogVM
+
+@foreach (var blog in Model.Blogs)
+{
+    <li style=" margin-top:30px; text-align: center; list-style: none; width:450px !important; height:450px;  background-color: #C72121;">
+        <a asp-controller="BlogDetail" asp-action="Index" asp-route-id="@blog.Id" style="color:whitesmoke; text-decoration:none;">
+            <img style="width:450px !important; height:290px;" src="~/assets/images/blog/@blog.BlogImages.FirstOrDefault()?.Name">
+            @blog.Title
+            @foreach (var category in blog.BlogSubCategories)
+            {
+                @if (category.SubCategory.CategoryId == 5)
+                {
+                    @category.SubCategory.Name
+                }
+            }
+        </a>
+    </li>
+}

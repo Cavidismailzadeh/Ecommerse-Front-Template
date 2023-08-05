@@ -1,0 +1,86 @@
+﻿@model ShopVM
+
+@section Links{
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous" />
+    <link rel="stylesheet"
+      href="~/assets/css/product-detail/product-detail.css" />
+    <title>Product detail</title>
+}
+
+<main>
+    <section id="product-detail" product-id="@Model.Product.Id">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-12 col-sm-12">
+                    <div id="div1">
+                        <div id="div3">
+                            @foreach (var product in Model.Product.ProductImages)
+                            {
+                                <div style="width: 79.35px; height: 119px;">
+                                    <img src="~/assets/images/home/products/@product.Name" />
+                                </div>
+                            }
+                        </div>
+                        <div id="div2">
+                            <img id="foto"
+                                 src="~/assets/images/home/products/@Model.Product.ProductImages.Where(m => m.IsMain).FirstOrDefault()?.Name" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12 col-sm-12 detail">
+                    <h6>@Model.SubCategory.Name</h6>
+                    <h3 class="">@Model.Product.Name</h3>
+                    <h2>$@Model.Product.Price.ToString("N2")</h2>
+                    <select class="my-3">
+                        <option>Select Size</option>
+                        @foreach (var productSubCategory in Model.Product.ProductSubCategories)
+                        {
+                            if (productSubCategory.SubCategory.CategoryId == 1)
+                            {
+                                <option>@productSubCategory.SubCategory.Name</option>
+                            }
+                        }
+                    </select>
+                    <input type="number" value="1" />
+                    <button class="add-btn">Add To Cart</button>
+                    <h4 class="mt-3">Product Details</h4>
+                    <span>
+                        @Model.Product.Description
+                    </span>
+                    <form>
+                        <div class="user-comment mt-3">
+                            <div class="user">
+                                <div class="bg-light p-2">
+                                    <div class="d-flex flex-row align-items-start">
+                                        <img class="rounded-circle" src="~/assets/images/shop/Elon_Musk_Royal_Society_(crop2).jpg" alt="">
+                                        <textarea class="form-control ml-1 shadow-none textarea"></textarea>
+                                    </div>
+                                    <div class="mt-2 text-right">
+                                        <button class="btn btn-success btn-sm shadow-none" type="button">Post comment</button>
+                                        <button class="btn btn-outline-danger btn-sm ml-1 shadow-none" type="button">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/b39b112ecb.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="~/assets/js/product-detail.js"></script>
+}

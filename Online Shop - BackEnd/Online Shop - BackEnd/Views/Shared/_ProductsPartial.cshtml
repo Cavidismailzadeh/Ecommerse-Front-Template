@@ -1,0 +1,42 @@
+﻿@model ShopVM
+
+@foreach (var product in Model.Products)
+{
+    <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+        <div class="product-item text-center"
+         product-id="@product.Id"
+         data-id="@product.ProductSubCategories.FirstOrDefault(m => m.SubCategory.CategoryId == 5)?.SubCategoryId">
+            <div class="img">
+                <a asp-controller="ProductDetail" asp-action="Index" asp-route-id="@product.Id">
+                    <img src="./assets/images/home/products/@product.ProductImages.FirstOrDefault(m => m.IsMain)?.Name"
+                     class="img-fluid"
+                     alt="" />
+                    <img src="./assets/images/home/products/@product.ProductImages.FirstOrDefault(m => !m.IsMain)?.Name"
+                     class="img-fluid"
+                     alt="" />
+                </a>
+                <div class="links">
+                    <div class="heart">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="title mt-3" style="color: grey;">
+                @foreach (var category in product.ProductSubCategories)
+                {
+                    @if (category.SubCategory.CategoryId == 2)
+                    {
+                        <h6>@category.SubCategory.Name</h6>
+                    }
+                }
+            </div>
+            <div class="title mt-3">
+                <h6>@product.Name</h6>
+            </div>
+            <div class="price">
+                <button>Add To Cart</button>
+                <span class="text-black-50">$@product.Price.ToString("N2")</span>
+            </div>
+        </div>
+    </div>
+}

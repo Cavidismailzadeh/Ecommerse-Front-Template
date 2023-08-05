@@ -1,0 +1,27 @@
+﻿@model Banner
+
+<div class="container-fluid mx-5 my-3">
+    <h3>Image</h3>
+    <img style="width: 498.7px; height: 200px; border-radius:10%" src="~/assets/images/home/@Model.Image" alt="banner" />
+    <form asp-action="Update" method="post" enctype="multipart/form-data">
+        <div class="form-group my-1">
+            <input class="form-control" asp-for="Photo">
+            <span class="text-danger" asp-validation-for="Photo"></span>
+        </div>
+        <div>
+            <h3 class="my-3">Title</h3>
+            <textarea class="form-control rounded-0" asp-for="Title" id="title" rows="5"></textarea>
+            <span class="text-danger my-1" asp-validation-for="Title"></span>
+        </div>
+        <a asp-controller="HomeBanner" asp-action="Index" style="color: white;" class="btn btn-danger my-3">Back</a>
+        <button type="submit" style="color: white;" class="btn btn-primary my-3">Update</button>
+    </form>
+</div>
+
+@section Scripts{
+        <partial name="_ValidationPartial" />
+        <script src="~/admin/ckeditor/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace("title");
+        </script>
+}
